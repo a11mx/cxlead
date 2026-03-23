@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ardin Maloku — CX Strategy & AI Automation</title>
+<meta name="description" content="I don't advise on CX. I build it.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0A0A0A;--cream:#F4EFE6;--gray:#888;--accent:#2A9D8F;--font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:var(--font);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* GRAIN OVERLAY */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+nav{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem;z-index:100;opacity:0}
+.logo{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.05em}
+.nav-cta{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--cream);color:var(--bg);padding:.6rem 1.4rem;transition:all .3s}
+.nav-cta:hover{background:var(--accent);color:var(--cream)}
+
+/* FULLSCREEN SECTIONS */
+.fs{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 3rem;position:relative}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);margin-bottom:2rem}
+
+/* HERO - CINEMATIC */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem}
+.hero-name{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:3rem;opacity:0}
+.hero h1{font-size:clamp(28px,5.5vw,70px);font-weight:800;line-height:1.15;letter-spacing:-.02em;max-width:800px}
+.hero h1 .word{display:inline-block;opacity:0;transform:translateY(20px)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-family:var(--mono);font-size:clamp(11px,1vw,13px);color:var(--gray);margin-top:3rem;max-width:450px;line-height:1.7;letter-spacing:.03em;opacity:0}
+.scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--gray);opacity:0}
+.scroll-hint::after{content:'';display:block;width:1px;height:40px;background:var(--gray);margin:8px auto 0;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+/* STORY */
+.story-line{font-size:clamp(20px,3vw,38px);font-weight:300;line-height:1.5;max-width:700px;opacity:0;transform:translateY(30px);margin-bottom:2rem}
+.story-line strong{font-weight:700}
+.story-line .dim{color:var(--gray)}
+.story-line .hi{color:var(--accent)}
+
+/* SERVICES - ONE BY ONE */
+.svc{padding:5rem 3rem;display:flex;align-items:center;gap:3rem;min-height:60vh;opacity:0;transform:translateY(30px)}
+.svc-num{font-family:var(--mono);font-size:clamp(60px,10vw,120px);font-weight:800;color:rgba(42,157,143,.15);line-height:1;flex-shrink:0}
+.svc-content h3{font-size:clamp(20px,2.5vw,30px);font-weight:700;margin-bottom:.8rem}
+.svc-content p{font-size:15px;color:var(--gray);line-height:1.7;max-width:500px}
+
+/* ZAF */
+.zaf-hero{font-size:clamp(22px,3.5vw,48px);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.zaf-hero em{font-style:normal;color:var(--accent)}
+.zaf-sub{font-size:14px;color:var(--gray);line-height:1.6;max-width:500px;margin:1.5rem 0 2.5rem}
+.zaf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.zaf-card{border:1px solid rgba(136,136,136,.15);padding:2rem;transition:all .4s;position:relative;overflow:hidden}
+.zaf-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);transform:scaleY(0);transition:transform .4s;transform-origin:top}
+.zaf-card:hover::before{transform:scaleY(1)}
+.zaf-card:hover{border-color:rgba(42,157,143,.3)}
+.zaf-card h4{font-size:16px;font-weight:600;margin-bottom:.6rem}
+.zaf-card p{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* NUMBERS */
+.num-section{text-align:center}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:3rem;margin-top:3rem}
+.num-val{font-size:clamp(50px,8vw,80px);font-weight:800;color:var(--accent);letter-spacing:-.03em;line-height:1}
+.num-lbl{font-family:var(--mono);font-size:11px;color:var(--gray);margin-top:.5rem;letter-spacing:.05em;text-transform:uppercase}
+
+/* CASES - CINEMATIC */
+.case-section{padding:4rem 3rem}
+.case-block{padding:3rem 0;border-bottom:1px solid rgba(136,136,136,.15);opacity:0;transform:translateY(30px)}
+.case-block:first-of-type{border-top:1px solid rgba(136,136,136,.15)}
+.case-quote{font-size:clamp(18px,2.5vw,28px);font-weight:300;font-style:italic;color:var(--cream);margin-bottom:1rem}
+.case-name{font-size:20px;font-weight:700;margin-bottom:.3rem}
+.case-meta{font-family:var(--mono);font-size:11px;color:var(--gray);letter-spacing:.05em;margin-bottom:1rem}
+.case-desc{font-size:14px;color:var(--gray);line-height:1.7;max-width:600px}
+.case-desc .hi{color:var(--accent);font-weight:500}
+
+/* TOOLS */
+.tech-grid{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.tech-item{font-family:var(--mono);font-size:12px;letter-spacing:.05em;padding:.7rem 1.2rem;border:1px solid rgba(136,136,136,.2);color:var(--gray);transition:all .3s}
+.tech-item:hover{color:var(--cream);border-color:var(--accent)}
+.tech-item span{display:block;font-family:var(--font);font-size:10px;color:var(--gray);margin-top:2px}
+
+/* AUDIENCE */
+.aud{text-align:center}
+.aud-h{font-size:clamp(20px,3vw,36px);font-weight:300;line-height:1.4;max-width:700px;margin:0 auto}
+.aud-h strong{font-weight:700;color:var(--cream)}
+.aud-h .dim{color:var(--gray)}
+
+/* CONTACT */
+.contact{background:var(--cream);color:var(--bg);text-align:center;min-height:80vh}
+.contact-h{font-size:clamp(40px,8vw,100px);font-weight:800;letter-spacing:-.03em;line-height:1}
+.contact-links{margin-top:2.5rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.contact-links a{font-family:var(--mono);font-size:13px;color:var(--bg);border-bottom:1px solid var(--bg);padding-bottom:2px;letter-spacing:.05em;transition:all .3s}
+.contact-links a:hover{color:var(--accent);border-color:var(--accent)}
+footer{background:var(--cream);color:var(--gray);padding:1.5rem 3rem;font-family:var(--mono);font-size:10px;letter-spacing:.1em;display:flex;justify-content:space-between}
+
+@media(max-width:768px){
+.fs,.hero{padding:4rem 1.5rem}
+nav{padding:1rem 1.5rem}
+.svc{flex-direction:column;padding:3rem 1.5rem;gap:1rem;min-height:auto}
+.svc-num{font-size:60px}
+.zaf-grid{grid-template-columns:1fr}
+.nums{grid-template-columns:repeat(2,1fr);gap:2rem}
+.case-section{padding:3rem 1.5rem}
+.contact-links{flex-direction:column;align-items:center}
+footer{flex-direction:column;gap:.4rem;padding:1rem 1.5rem}
+}
+</style>
+</head>
+<body>
+<nav id="nav"><a href="#" class="logo">CXLead.co</a><a href="#contact" class="nav-cta">Get in touch</a></nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-name">ARDIN MALOKU / CX_STRATEGY</div>
+<h1><span class="word">I've</span> <span class="word">seen</span> <span class="word">what</span> <span class="word">broken</span> <span class="word">CX</span> <span class="word">looks</span> <span class="word">like</span> <span class="word">at</span> <span class="word">scale.</span><br><span class="word"><em>I</em></span> <span class="word"><em>fix</em></span> <span class="word"><em>it.</em></span></h1>
+<p class="hero-sub">AI-native customer experience strategy, automation, and implementation. 9+ years. 25M+ users. Systems that actually work.</p>
+<div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- STORY -->
+<section class="fs">
+<div class="label">01 — THE STORY</div>
+<div class="story-line"><span class="dim">I started in the trenches — answering tickets, building macros, figuring out why customers leave.</span></div>
+<div class="story-line">Then I built CX organizations from scratch for companies with <strong>25 million users</strong> and <strong>$3B+ valuations</strong>.</div>
+<div class="story-line"><span class="dim">Along the way I learned something:</span> <span class="hi">most CX consultants advise. I'd rather build.</span></div>
+<div class="story-line">I write the automations. I ship the AI tools. I architect the Zendesk instances. <strong>I stay until the metrics move.</strong></div>
+</section>
+
+<!-- SERVICES -->
+<div class="svc"><div class="svc-num">01</div><div class="svc-content"><h3>AI-Powered QA Automation</h3><p>I built a system that cut QA review time by 90%. Automated scoring, sentiment analysis, coaching triggers — not another spreadsheet that nobody opens.</p></div></div>
+<div class="svc"><div class="svc-num">02</div><div class="svc-content"><h3>Zendesk Architecture</h3><p>Expert certified. I don't just configure Zendesk — I architect it. Triggers, automations, custom apps, and reporting that your team will actually use.</p></div></div>
+<div class="svc"><div class="svc-num">03</div><div class="svc-content"><h3>Health Scoring & Churn</h3><p>Know who's leaving before they know. Data-driven health scores, risk dashboards, and proactive playbooks that keep revenue in the building.</p></div></div>
+<div class="svc"><div class="svc-num">04</div><div class="svc-content"><h3>AI Chatbot Design</h3><p>Bots that actually understand context. Self-serve knowledge bases that deflect tickets without making customers hate you.</p></div></div>
+<div class="svc"><div class="svc-num">05</div><div class="svc-content"><h3>CX Team Scaling</h3><p>Built 24/5 global operations from scratch. Remote-first hiring, onboarding, performance systems for distributed teams that actually perform.</p></div></div>
+<div class="svc"><div class="svc-num">06</div><div class="svc-content"><h3>n8n Workflow Automation</h3><p>The automation layer your support team doesn't know it needs. Routing, escalation, reporting — connected and running without anyone touching a spreadsheet.</p></div></div>
+
+<!-- ZAF APPS -->
+<section class="fs" style="padding-top:6rem">
+<div class="label">02 — ZAF APPS</div>
+<div class="zaf-hero">I don't just use Zendesk.<br><em>I extend it.</em></div>
+<p class="zaf-sub">Custom apps built on the Zendesk Apps Framework. Your team gets superpowers inside the tools they already use.</p>
+<div class="zaf-grid">
+<div class="zaf-card"><h4>Returns Portal</h4><p>Automated ticket creation with supplier escalation. Customers stay informed, margins stay protected. No manual handoffs.</p></div>
+<div class="zaf-card"><h4>AI QA Dashboard</h4><p>AI-powered quality scoring with sentiment analysis. 90% faster reviews. Every conversation scored, every pattern caught.</p></div>
+<div class="zaf-card"><h4>Performance Reporter</h4><p>AI-generated weekly reports delivered automatically. Team metrics, trends, coaching opportunities — zero spreadsheet work.</p></div>
+<div class="zaf-card"><h4>Escalation Engine</h4><p>Smart routing that sends complex issues to the right person with full context. No copy-paste, no lost threads.</p></div>
+</div>
+</section>
+
+<!-- NUMBERS -->
+<section class="fs num-section">
+<div class="label">03 — THE NUMBERS</div>
+<div class="nums">
+<div><div class="num-val" data-target="25" data-suffix="M+">0</div><div class="num-lbl">Users impacted</div></div>
+<div><div class="num-val" data-target="98.5" data-suffix="%" data-d="1">0</div><div class="num-lbl">CSAT achieved</div></div>
+<div><div class="num-val" data-target="37.9" data-suffix="%" data-d="1">0</div><div class="num-lbl">Faster response</div></div>
+<div><div class="num-val" data-target="90" data-prefix="~" data-suffix="%">0</div><div class="num-lbl">QA time cut</div></div>
+</div>
+</section>
+
+<!-- CASES -->
+<div class="case-section">
+<div class="label">04 — PROOF</div>
+<div class="case-block">
+<div class="case-quote">"25 million users. Zero CX infrastructure. I built it all."</div>
+<div class="case-name">Visme</div>
+<div class="case-meta">25M+ users · Head of Support · 3 years</div>
+<p class="case-desc">Built the CX organization from scratch. 24/5 remote-first operations. AI-powered knowledge base. <span class="hi">37.9% faster response times.</span> <span class="hi">24.8% better first contact resolution.</span> Customer feedback loops operationalized into the product roadmap.</p>
+</div>
+<div class="case-block">
+<div class="case-quote">"A $3B company trusted me with their customer happiness."</div>
+<div class="case-name">Remote.com</div>
+<div class="case-meta">$3B valuation · User Happiness Manager · 3 years</div>
+<p class="case-desc">Global CS team across multiple time zones. <span class="hi">98.5% CSAT sustained.</span> Built AI chatbots and internal productivity tools. Retention dashboards tracking every at-risk account. Standardized processes that scale.</p>
+</div>
+<div class="case-block">
+<div class="case-quote">"15 agents. No system. I gave them one."</div>
+<div class="case-name">ButcherCrowd</div>
+<div class="case-meta">DTC Delivery · CX Consultant</div>
+<p class="case-desc">Full Zendesk implementation from zero. Custom AI QA reporting platform. <span class="hi">~90% reduction in QA submission time.</span> Chaos became a measurable, optimized machine.</p>
+</div>
+</div>
+
+<!-- TOOLS -->
+<section class="fs">
+<div class="label">05 — ARSENAL</div>
+<div class="tech-grid">
+<div class="tech-item">Zendesk<span>Expert Certified</span></div>
+<div class="tech-item">Salesforce<span>CRM & Reporting</span></div>
+<div class="tech-item">n8n<span>Automation Architect</span></div>
+<div class="tech-item">Intercom<span>Messaging & Bots</span></div>
+<div class="tech-item">Gorgias<span>E-commerce CX</span></div>
+<div class="tech-item">OpenAI<span>AI Native</span></div>
+<div class="tech-item">Anthropic<span>AI Native</span></div>
+<div class="tech-item">Gainsight<span>CS Platform</span></div>
+</div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="fs aud">
+<div class="label">06 — WHO THIS IS FOR</div>
+<p class="aud-h"><strong>Solo founder</strong> <span class="dim">drowning in tickets.</span> <strong>Growing startup</strong> <span class="dim">scaling from 5 to 50 agents.</span> <strong>Enterprise CX leader</strong> <span class="dim">optimizing at scale.</span><br><br>I build the systems that fix it. <strong>One person or one thousand.</strong></p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact fs" id="contact">
+<div class="label" style="color:var(--gray)">07 — READY?</div>
+<div class="contact-h">Let's build.</div>
+<div class="contact-links"><a href="mailto:ard@cxlead.co">ard@cxlead.co</a><a href="https://linkedin.com/in/ardin" target="_blank">LinkedIn</a></div>
+</section>
+<footer><span>© 2026 ARDIN MALOKU</span><span>CXLEAD.CO</span></footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+// Nav reveal
+gsap.to('#nav',{opacity:1,duration:.8,delay:.5});
+// Hero word-by-word
+gsap.to('.hero-name',{opacity:1,duration:1,delay:.3});
+document.querySelectorAll('.word').forEach((w,i)=>{gsap.to(w,{opacity:1,y:0,duration:.5,delay:.6+i*.08,ease:"power2.out"})});
+gsap.to('.hero-sub',{opacity:1,duration:.8,delay:2});
+gsap.to('.scroll-hint',{opacity:1,duration:.6,delay:2.5});
+// Story lines
+document.querySelectorAll('.story-line').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.8,ease:"power2.out",scrollTrigger:{trigger:el,start:"top 80%",once:true}})});
+// Services
+document.querySelectorAll('.svc').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.7,ease:"power2.out",scrollTrigger:{trigger:el,start:"top 80%",once:true}})});
+// Case blocks
+document.querySelectorAll('.case-block').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.7,ease:"power2.out",scrollTrigger:{trigger:el,start:"top 85%",once:true}})});
+// Numbers
+document.querySelectorAll('.num-val').forEach(el=>{const t=parseFloat(el.dataset.target),s=el.dataset.suffix||'',p=el.dataset.prefix||'',d=parseInt(el.dataset.d)||0;ScrollTrigger.create({trigger:el,start:"top 85%",once:true,onEnter:()=>{const o={v:0};gsap.to(o,{v:t,duration:2,ease:"power2.out",onUpdate:()=>{el.textContent=p+o.v.toFixed(d)+s}})}})});
+</script>
+</body>
+</html>
