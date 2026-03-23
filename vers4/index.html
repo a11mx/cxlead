@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CXLead — CX Systems That Scale</title>
+<meta name="description" content="AI-powered CX consulting. We design, build, and optimize customer experience systems for high-growth companies.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0A0A0A;--cream:#F4EFE6;--gray:#888;--accent:#2A9D8F;--font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--cream);font-family:var(--font);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* GRAIN */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+nav{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:2rem 4rem;z-index:100}
+.logo{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.logo em{font-style:normal;color:var(--accent);font-weight:400}
+.nav-r{display:flex;gap:2rem;align-items:center}
+.nav-r a{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);transition:color .3s}
+.nav-r a:hover{color:var(--cream)}
+.nav-r .cta-btn{background:var(--cream);color:var(--bg);padding:.6rem 1.5rem;font-weight:500}
+.nav-r .cta-btn:hover{background:var(--accent);color:var(--cream)}
+
+section{padding:8rem 4rem;position:relative}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.tag::before{content:'';width:30px;height:1px;background:var(--accent)}
+.reveal{opacity:0;transform:translateY(20px)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:0 4rem}
+.hero-inner{max-width:1200px;width:100%;display:grid;grid-template-columns:1.2fr 1fr;gap:6rem;align-items:center}
+.hero h1{font-size:clamp(32px,4.5vw,60px);font-weight:800;line-height:1.1;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-left .tag{margin-bottom:2rem}
+.hero-left p{font-size:16px;color:var(--gray);line-height:1.65;margin-top:1.5rem;max-width:500px}
+.hero-left .btns{display:flex;gap:1rem;margin-top:2.5rem}
+.btn-a{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:.8rem 2rem;background:var(--accent);color:var(--cream);transition:all .3s}
+.btn-a:hover{background:var(--cream);color:var(--bg)}
+.btn-b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:.8rem 2rem;border:1px solid rgba(136,136,136,.2);color:var(--gray);transition:all .3s}
+.btn-b:hover{border-color:var(--cream);color:var(--cream)}
+.hero-right{display:flex;flex-direction:column;gap:1.5rem}
+.hero-stat{border-left:2px solid var(--accent);padding-left:1.5rem}
+.hero-stat-val{font-size:36px;font-weight:800;color:var(--cream);letter-spacing:-.02em}
+.hero-stat-lbl{font-family:var(--mono);font-size:11px;color:var(--gray);letter-spacing:.05em;margin-top:.2rem}
+
+/* MANIFESTO */
+.manifesto{border-top:1px solid rgba(136,136,136,.1);border-bottom:1px solid rgba(136,136,136,.1);padding:8rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.manifesto-left h2{font-size:clamp(28px,3.5vw,48px);font-weight:800;line-height:1.15;letter-spacing:-.02em}
+.manifesto-right{display:flex;flex-direction:column;gap:2rem}
+.manifesto-right p{font-size:16px;color:var(--gray);line-height:1.7}
+.manifesto-right strong{color:var(--cream);font-weight:600}
+
+/* CAPABILITIES */
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(136,136,136,.1);margin-top:3rem}
+.cap{padding:3rem;border-right:1px solid rgba(136,136,136,.1);border-bottom:1px solid rgba(136,136,136,.1);transition:background .4s}
+.cap:nth-child(3n){border-right:none}
+.cap:nth-child(n+4){border-bottom:none}
+.cap:hover{background:rgba(42,157,143,.04)}
+.cap-num{font-family:var(--mono);font-size:28px;font-weight:700;color:rgba(42,157,143,.25);margin-bottom:1rem}
+.cap h3{font-size:17px;font-weight:600;margin-bottom:.7rem}
+.cap p{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* ZAF PLATFORM */
+.zaf-section{background:linear-gradient(180deg,rgba(42,157,143,.06) 0%,var(--bg) 100%)}
+.zaf-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:3rem;align-items:end}
+.zaf-h{font-size:clamp(28px,3.5vw,46px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.zaf-h em{font-style:normal;color:var(--accent)}
+.zaf-desc{font-size:15px;color:var(--gray);line-height:1.7}
+.zaf-apps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(42,157,143,.15)}
+.zaf-app{padding:2.5rem;border-right:1px solid rgba(42,157,143,.15);transition:all .4s;position:relative}
+.zaf-app:last-child{border-right:none}
+.zaf-app:hover{background:rgba(42,157,143,.06)}
+.zaf-app-icon{width:36px;height:36px;border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:1.2rem}
+.zaf-app h4{font-size:15px;font-weight:600;margin-bottom:.6rem}
+.zaf-app p{font-size:12px;color:var(--gray);line-height:1.6}
+
+/* WORK */
+.work-list{margin-top:3rem}
+.work-item{display:grid;grid-template-columns:1fr 2fr;gap:4rem;padding:3rem 0;border-bottom:1px solid rgba(136,136,136,.1);align-items:start}
+.work-item:first-child{border-top:1px solid rgba(136,136,136,.1)}
+.work-left h3{font-size:28px;font-weight:700;margin-bottom:.3rem}
+.work-left .work-meta{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.05em}
+.work-right p{font-size:15px;color:var(--gray);line-height:1.7;margin-bottom:1.2rem}
+.work-metrics{display:flex;gap:2rem;flex-wrap:wrap}
+.work-metric{font-family:var(--mono);font-size:12px}
+.work-metric span{color:var(--accent);font-weight:600;font-size:14px;display:block;margin-bottom:2px}
+
+/* CLIENTS */
+.audience-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;margin-top:3rem}
+.aud-col{padding-top:1.5rem;border-top:1px solid rgba(136,136,136,.15)}
+.aud-col h4{font-size:16px;font-weight:600;margin-bottom:.6rem}
+.aud-col p{font-size:13px;color:var(--gray);line-height:1.65}
+
+/* TECH */
+.tech-bar{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}
+.t-pill{font-family:var(--mono);font-size:11px;padding:.5rem 1rem;border:1px solid rgba(136,136,136,.12);color:var(--gray);transition:all .3s}
+.t-pill:hover{border-color:var(--accent);color:var(--accent)}
+
+/* CONTACT */
+.contact-section{background:var(--cream);color:var(--bg);padding:10rem 4rem}
+.contact-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;align-items:start}
+.contact-h{font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.contact-p{font-size:15px;color:var(--gray);line-height:1.6;margin-top:1.5rem}
+.contact-right{padding-top:1rem}
+.contact-item{margin-bottom:2rem}
+.contact-item-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);margin-bottom:.5rem}
+.contact-item a{font-size:18px;font-weight:500;color:var(--bg);border-bottom:1px solid var(--bg);padding-bottom:2px;transition:all .3s}
+.contact-item a:hover{color:var(--accent);border-color:var(--accent)}
+
+footer{background:var(--cream);color:var(--gray);padding:2rem 4rem;font-family:var(--mono);font-size:10px;letter-spacing:.1em;display:flex;justify-content:space-between;border-top:1px solid rgba(136,136,136,.1)}
+
+@media(max-width:768px){
+nav{padding:1.2rem 1.5rem}.nav-r a:not(.cta-btn){display:none}
+section{padding:5rem 1.5rem}
+.hero{padding:0 1.5rem}.hero-inner{grid-template-columns:1fr;gap:3rem}.hero-right{flex-direction:row;flex-wrap:wrap;gap:1rem}
+.manifesto{grid-template-columns:1fr;gap:2rem;padding:5rem 1.5rem}
+.cap-grid{grid-template-columns:1fr}.cap{border-right:none}
+.zaf-header{grid-template-columns:1fr;gap:1.5rem}
+.zaf-apps{grid-template-columns:1fr}.zaf-app{border-right:none;border-bottom:1px solid rgba(42,157,143,.15)}.zaf-app:last-child{border-bottom:none}
+.work-item{grid-template-columns:1fr;gap:1.5rem}
+.audience-cols{grid-template-columns:1fr}
+.contact-section{padding:5rem 1.5rem}.contact-grid{grid-template-columns:1fr;gap:2rem}
+footer{flex-direction:column;gap:.4rem;padding:1.5rem}
+}
+</style>
+</head>
+<body>
+<nav>
+<a href="#" class="logo">CXLead<em>.co</em></a>
+<div class="nav-r">
+<a href="#capabilities">Services</a>
+<a href="#zaf">Platform</a>
+<a href="#work">Work</a>
+<a href="#contact" class="cta-btn">Start a Project</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="hero-left reveal">
+<div class="tag">CX Consulting & Engineering</div>
+<h1>Design. Build. Optimize.<br><em>Customer experience that scales.</em></h1>
+<p>We're a CX consulting practice that actually builds things. AI automation, Zendesk architecture, custom apps, team design — from strategy to production.</p>
+<div class="btns"><a href="#contact" class="btn-a">Start a project</a><a href="#work" class="btn-b">See results</a></div>
+</div>
+<div class="hero-right reveal">
+<div class="hero-stat"><div class="hero-stat-val">25M+</div><div class="hero-stat-lbl">Users impacted across clients</div></div>
+<div class="hero-stat"><div class="hero-stat-val">98.5%</div><div class="hero-stat-lbl">CSAT achieved at $3B company</div></div>
+<div class="hero-stat"><div class="hero-stat-val">~90%</div><div class="hero-stat-lbl">QA time reduction via custom AI</div></div>
+</div>
+</div>
+</section>
+
+<div class="manifesto reveal">
+<div class="manifesto-left"><h2>Most CX consultants sell advice.<br>We sell outcomes.</h2></div>
+<div class="manifesto-right">
+<p><strong>Here's the problem:</strong> you hire a consultant, they audit your setup, hand you a 40-page deck, and disappear. Your team is left trying to implement recommendations they don't fully understand.</p>
+<p><strong>We do it differently.</strong> We embed with your team. We build the Zendesk instance, write the automations, ship the AI tools, design the QA systems, and train your people. We don't leave until the dashboards prove it's working.</p>
+<p>That's the difference between a consulting firm and an <strong>engineering-led CX practice</strong>.</p>
+</div>
+</div>
+
+<section id="capabilities" class="reveal">
+<div class="tag">Capabilities</div>
+<div class="cap-grid">
+<div class="cap reveal"><div class="cap-num">01</div><h3>AI QA Automation</h3><p>Custom quality platforms with AI scoring, sentiment analysis, coaching triggers. 90% faster than manual review.</p></div>
+<div class="cap reveal"><div class="cap-num">02</div><h3>Zendesk Architecture</h3><p>Expert-certified. Full implementation or optimization — triggers, workflows, custom apps, analytics.</p></div>
+<div class="cap reveal"><div class="cap-num">03</div><h3>Health Scoring</h3><p>Customer health frameworks that predict churn. Risk dashboards, proactive playbooks, retention systems.</p></div>
+<div class="cap reveal"><div class="cap-num">04</div><h3>AI Chatbots & KB</h3><p>Intelligent self-serve systems. Bots that understand context and knowledge bases that actually deflect.</p></div>
+<div class="cap reveal"><div class="cap-num">05</div><h3>Team Design</h3><p>Remote-first CX org design. Hiring, onboarding, performance systems for teams of 5 to 500.</p></div>
+<div class="cap reveal"><div class="cap-num">06</div><h3>Workflow Automation</h3><p>n8n-powered automation layers. Routing, escalation, reporting — connected and running autonomously.</p></div>
+</div>
+</section>
+
+<section id="zaf" class="zaf-section reveal">
+<div class="tag">Platform</div>
+<div class="zaf-header">
+<div class="zaf-h">Custom Zendesk Apps.<br><em>Built for your workflow.</em></div>
+<p class="zaf-desc">Production-grade apps on the Zendesk Apps Framework. We don't just configure your helpdesk — we extend it with custom tooling that makes your agents faster and your operations smarter.</p>
+</div>
+<div class="zaf-apps">
+<div class="zaf-app reveal"><div class="zaf-app-icon">RP</div><h4>Returns Portal</h4><p>Automated return flows with supplier escalation. Full customer visibility, protected margins.</p></div>
+<div class="zaf-app reveal"><div class="zaf-app-icon">QA</div><h4>AI QA Dashboard</h4><p>Every conversation scored. Sentiment, compliance, coaching — all automated, all real-time.</p></div>
+<div class="zaf-app reveal"><div class="zaf-app-icon">PR</div><h4>Performance Reporter</h4><p>AI-generated weekly reports. Team trends, outliers, priorities — zero spreadsheet work.</p></div>
+<div class="zaf-app reveal"><div class="zaf-app-icon">EE</div><h4>Escalation Engine</h4><p>Smart routing with full context. Right person, right info, right time. No manual handoffs.</p></div>
+</div>
+</section>
+
+<section id="work" class="reveal">
+<div class="tag">Selected Work</div>
+<div class="work-list">
+<div class="work-item reveal">
+<div class="work-left"><h3>Visme</h3><div class="work-meta">25M+ users · SaaS Platform · Head of Support</div></div>
+<div class="work-right">
+<p>Built CX organization from zero. 24/5 remote-first operations, AI-powered knowledge base, customer feedback operationalized into product roadmap.</p>
+<div class="work-metrics">
+<div class="work-metric"><span>37.9%</span>Faster response</div>
+<div class="work-metric"><span>24.8%</span>Better FCR</div>
+<div class="work-metric"><span>24/5</span>Global ops</div>
+</div>
+</div>
+</div>
+<div class="work-item reveal">
+<div class="work-left"><h3>Remote.com</h3><div class="work-meta">$3B valuation · HR Tech · User Happiness</div></div>
+<div class="work-right">
+<p>Enterprise-scale CS across multiple time zones. AI chatbots, internal productivity tools, retention dashboards for at-risk accounts.</p>
+<div class="work-metrics">
+<div class="work-metric"><span>98.5%</span>CSAT sustained</div>
+<div class="work-metric"><span>AI</span>Tools shipped</div>
+<div class="work-metric"><span>Global</span>Multi-TZ team</div>
+</div>
+</div>
+</div>
+<div class="work-item reveal">
+<div class="work-left"><h3>ButcherCrowd</h3><div class="work-meta">DTC Delivery · CX Consulting</div></div>
+<div class="work-right">
+<p>Full Zendesk deployment for 15-agent team. Custom AI QA reporting platform. From chaos to system in weeks.</p>
+<div class="work-metrics">
+<div class="work-metric"><span>~90%</span>QA time cut</div>
+<div class="work-metric"><span>15</span>Agents onboarded</div>
+<div class="work-metric"><span>Custom</span>AI QA built</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="reveal">
+<div class="tag">Who We Work With</div>
+<div class="audience-cols">
+<div class="aud-col reveal"><h4>Startups & Scale-ups</h4><p>Support is breaking and you're duct-taping solutions. We build the CX foundation that scales from day one — systems, people, automation.</p></div>
+<div class="aud-col reveal"><h4>Mid-Market SaaS</h4><p>You have a team and tools but the efficiency isn't there. We optimize your stack, automate the repetitive, and build the dashboards that drive decisions.</p></div>
+<div class="aud-col reveal"><h4>Enterprise</h4><p>Complex requirements. Multi-team coordination. Custom integrations. We've delivered at $3B+ scale with full AI integration and custom app development.</p></div>
+</div>
+</section>
+
+<section class="reveal">
+<div class="tag">Technology</div>
+<div class="tech-bar">
+<div class="t-pill">Zendesk (Expert)</div><div class="t-pill">Salesforce</div><div class="t-pill">n8n</div><div class="t-pill">Intercom</div>
+<div class="t-pill">Gorgias</div><div class="t-pill">OpenAI</div><div class="t-pill">Anthropic</div><div class="t-pill">Gainsight</div>
+<div class="t-pill">ZAF</div><div class="t-pill">Richpanel</div><div class="t-pill">Jira</div><div class="t-pill">Slack</div>
+</div>
+</section>
+
+<section class="contact-section" id="contact">
+<div class="contact-grid">
+<div class="reveal">
+<div class="tag" style="color:var(--accent)">Start a project</div>
+<div class="contact-h">Let's build CX that actually works.</div>
+<p class="contact-p">Tell us what's broken. We'll tell you how to fix it — then we'll build it with you.</p>
+</div>
+<div class="contact-right reveal">
+<div class="contact-item"><div class="contact-item-label">Email</div><a href="mailto:ard@cxlead.co">ard@cxlead.co</a></div>
+<div class="contact-item"><div class="contact-item-label">LinkedIn</div><a href="https://linkedin.com/in/ardin" target="_blank">linkedin.com/in/ardin</a></div>
+<div class="contact-item"><div class="contact-item-label">Website</div><a href="https://cxlead.co">cxlead.co</a></div>
+</div>
+</div>
+</section>
+<footer><span>© 2026 CXLead</span><span>CX Consulting & Engineering</span></footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+document.querySelectorAll('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.65,ease:"power2.out",scrollTrigger:{trigger:el,start:"top 85%",once:true}})});
+</script>
+</body>
+</html>
