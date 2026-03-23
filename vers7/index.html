@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CXLead — The CX Engineering Firm</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0A0A0A;--cream:#F4EFE6;--gray:#888;--accent:#2A9D8F;--font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace}
+body{background:var(--bg);color:var(--cream);font-family:var(--font);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* V7 — PRODUCT-STYLE, treat CXLead like a platform */
+nav{position:fixed;top:0;left:0;right:0;padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;z-index:100;border-bottom:1px solid rgba(136,136,136,.06);backdrop-filter:blur(20px);background:rgba(10,10,10,.85)}
+.logo{display:flex;align-items:center;gap:.8rem;font-size:16px;font-weight:700}
+.logo-mark{width:28px;height:28px;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:700}
+.nav-r{display:flex;gap:2rem;align-items:center}
+.nav-r a{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);transition:color .3s}
+.nav-r a:hover{color:var(--cream)}
+.nav-btn{background:var(--cream)!important;color:var(--bg)!important;padding:.5rem 1.4rem;font-weight:500}
+.nav-btn:hover{background:var(--accent)!important;color:var(--cream)!important}
+
+.reveal{opacity:0;transform:translateY(20px)}
+
+/* HERO — PRODUCT LAUNCH FEEL */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem}
+.hero-badge{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);padding:.5rem 1.2rem;border:1px solid rgba(42,157,143,.3);margin-bottom:2.5rem;display:inline-block}
+.hero h1{font-size:clamp(36px,6vw,76px);font-weight:800;line-height:1.08;letter-spacing:-.03em;max-width:900px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),#4ECDC4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(14px,1.3vw,17px);color:var(--gray);margin-top:1.5rem;max-width:550px;line-height:1.6}
+.hero-ctas{display:flex;gap:1rem;margin-top:2.5rem}
+.h-btn{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:.8rem 2rem;transition:all .3s}
+.h-btn-a{background:var(--accent);color:var(--cream)}.h-btn-a:hover{background:var(--cream);color:var(--bg)}
+.h-btn-b{border:1px solid rgba(136,136,136,.2);color:var(--gray)}.h-btn-b:hover{border-color:var(--cream);color:var(--cream)}
+
+/* FEATURES — BENTO GRID */
+.bento{padding:2rem 4rem 8rem;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:1px;background:rgba(136,136,136,.08)}
+.bento-card{background:var(--bg);padding:3rem;transition:all .4s;position:relative;overflow:hidden}
+.bento-card:hover{background:rgba(42,157,143,.03)}
+.bento-card.wide{grid-column:span 2}
+.bento-card .b-icon{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.bento-card h3{font-size:18px;font-weight:600;margin-bottom:.7rem}
+.bento-card p{font-size:13px;color:var(--gray);line-height:1.65;max-width:400px}
+.bento-card.featured{background:rgba(42,157,143,.04);border:1px solid rgba(42,157,143,.1)}
+.bento-card.featured h3{font-size:22px;color:var(--accent)}
+
+/* ZAF — PRODUCT SECTION */
+.zaf-section{padding:8rem 4rem;border-top:1px solid rgba(136,136,136,.08)}
+.zaf-header{text-align:center;margin-bottom:4rem}
+.zaf-header h2{font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:-.02em}
+.zaf-header h2 em{font-style:normal;color:var(--accent)}
+.zaf-header p{font-size:14px;color:var(--gray);margin-top:.8rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6}
+.zaf-products{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.zaf-prod{border:1px solid rgba(136,136,136,.1);padding:2.5rem;text-align:center;transition:all .4s;position:relative}
+.zaf-prod:hover{border-color:var(--accent);transform:translateY(-4px)}
+.zaf-prod .icon-box{width:48px;height:48px;border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600}
+.zaf-prod h4{font-size:14px;font-weight:600;margin-bottom:.5rem}
+.zaf-prod p{font-size:12px;color:var(--gray);line-height:1.55}
+
+/* RESULTS */
+.results{padding:8rem 4rem;background:rgba(42,157,143,.03);border-top:1px solid rgba(42,157,143,.08)}
+.results-header{text-align:center;margin-bottom:4rem}
+.results-header h2{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.02em}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.result-card{background:var(--bg);border:1px solid rgba(136,136,136,.1);padding:2.5rem;transition:border-color .3s}
+.result-card:hover{border-color:rgba(42,157,143,.3)}
+.result-card h3{font-size:20px;font-weight:700;margin-bottom:.2rem}
+.result-card .r-meta{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.06em;margin-bottom:1rem}
+.result-card p{font-size:13px;color:var(--gray);line-height:1.65;margin-bottom:1.2rem}
+.result-card .r-stats{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.r-stat{background:rgba(42,157,143,.05);padding:.8rem;text-align:center}
+.r-stat-val{font-size:18px;font-weight:700;color:var(--accent)}
+.r-stat-lbl{font-size:10px;color:var(--gray);margin-top:.1rem;font-family:var(--mono);letter-spacing:.03em}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(136,136,136,.08);border-bottom:1px solid rgba(136,136,136,.08)}
+.stat-cell{text-align:center;padding:3rem 2rem;border-right:1px solid rgba(136,136,136,.08)}
+.stat-cell:last-child{border:none}
+.stat-v{font-size:clamp(32px,4vw,48px);font-weight:800;color:var(--accent)}
+.stat-l{font-family:var(--mono);font-size:10px;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;margin-top:.3rem}
+
+/* AUDIENCE */
+.for-section{padding:8rem 4rem}
+.for-header{text-align:center;margin-bottom:3rem}
+.for-header h2{font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-.02em}
+.for-header p{font-size:14px;color:var(--gray);margin-top:.5rem}
+.for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.for-card{padding:2.5rem;border:1px solid rgba(136,136,136,.08);text-align:center;transition:all .3s}
+.for-card:hover{border-color:rgba(42,157,143,.25)}
+.for-card .fc-icon{font-size:28px;margin-bottom:1rem}
+.for-card h4{font-size:15px;font-weight:600;margin-bottom:.5rem}
+.for-card p{font-size:12px;color:var(--gray);line-height:1.6}
+
+/* TECH */
+.tech-bar{padding:4rem;display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;border-top:1px solid rgba(136,136,136,.06)}
+.t-chip{font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:.4rem 1rem;background:rgba(136,136,136,.06);color:var(--gray);transition:all .3s}
+.t-chip:hover{background:rgba(42,157,143,.1);color:var(--accent)}
+
+/* CTA */
+.cta-section{background:var(--cream);color:var(--bg);padding:10rem 4rem;text-align:center}
+.cta-section h2{font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.cta-section p{font-size:15px;color:var(--gray);margin:1rem auto 2.5rem;max-width:400px;line-height:1.6}
+.cta-row{display:flex;gap:1.5rem;justify-content:center}
+.cta-row a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:.8rem 2rem;border:1px solid var(--bg);color:var(--bg);transition:all .3s}
+.cta-row a:hover{background:var(--accent);border-color:var(--accent);color:var(--cream)}
+footer{background:var(--cream);color:var(--gray);padding:1.5rem 4rem;font-family:var(--mono);font-size:10px;letter-spacing:.1em;display:flex;justify-content:space-between;border-top:1px solid rgba(136,136,136,.1)}
+
+@media(max-width:768px){
+nav{padding:1rem 1.5rem}
+.hero{padding:6rem 1.5rem 3rem}
+.bento{grid-template-columns:1fr;padding:1rem 1.5rem 4rem}.bento-card.wide{grid-column:span 1}
+.zaf-section,.results,.for-section{padding:5rem 1.5rem}
+.zaf-products{grid-template-columns:1fr 1fr}
+.results-grid,.for-grid{grid-template-columns:1fr}
+.stats-row{grid-template-columns:repeat(2,1fr)}
+.stat-cell{border-bottom:1px solid rgba(136,136,136,.08)}
+.cta-section{padding:5rem 1.5rem}
+.cta-row{flex-direction:column;align-items:center}
+.tech-bar{padding:3rem 1.5rem}
+footer{flex-direction:column;gap:.4rem;padding:1.5rem}
+}
+</style>
+</head>
+<body>
+<nav>
+<a href="#" class="logo"><div class="logo-mark">CX</div>CXLead</a>
+<div class="nav-r"><a href="#results">Results</a><a href="#services">Services</a><a href="#contact" class="nav-btn">Get started</a></div>
+</nav>
+
+<section class="hero">
+<div class="hero-badge reveal">AI-Native CX Engineering</div>
+<h1 class="reveal">The operating system for <em>world-class customer experience.</em></h1>
+<p class="reveal">We design, build, and optimize the CX infrastructure that high-growth companies need. Zendesk architecture. AI automation. Custom apps. Team design.</p>
+<div class="hero-ctas reveal"><a href="#contact" class="h-btn h-btn-a">Start a project</a><a href="#results" class="h-btn h-btn-b">View case studies</a></div>
+</section>
+
+<div class="bento" id="services">
+<div class="bento-card featured wide reveal"><div class="b-icon">Core</div><h3>AI-Powered QA Automation</h3><p>We build custom quality assurance platforms that score every conversation with AI. Sentiment analysis, compliance checks, coaching triggers — 90% faster than manual review. Not a tool you configure. A system we build for you.</p></div>
+<div class="bento-card reveal"><div class="b-icon">Architecture</div><h3>Zendesk Expert</h3><p>Certified architects. We build your Zendesk from the ground up — or optimize what you have. Triggers, automations, reporting, custom apps.</p></div>
+<div class="bento-card reveal"><div class="b-icon">Intelligence</div><h3>Health Scoring</h3><p>Predict churn before customers leave. Risk dashboards, automated intervention, retention playbooks.</p></div>
+<div class="bento-card featured wide reveal"><div class="b-icon">AI</div><h3>Chatbot & Self-Serve Design</h3><p>Context-aware chatbots and knowledge bases that deflect tickets without making customers hate you. Designed for your product, trained on your data, integrated with your stack.</p></div>
+<div class="bento-card reveal"><div class="b-icon">Operations</div><h3>CX Team Scaling</h3><p>Remote-first team design. Hiring, onboarding, performance systems for distributed support teams.</p></div>
+<div class="bento-card reveal"><div class="b-icon">Automation</div><h3>n8n Workflows</h3><p>Custom automation connecting your CX stack. Routing, escalation, reporting — runs autonomously.</p></div>
+</div>
+
+<section class="zaf-section">
+<div class="zaf-header reveal">
+<h2>Custom Zendesk Apps. <em>Built to order.</em></h2>
+<p>Production-grade ZAF apps that transform your helpdesk into a platform. Your agents get superpowers.</p>
+</div>
+<div class="zaf-products">
+<div class="zaf-prod reveal"><div class="icon-box">RP</div><h4>Returns Portal</h4><p>Automated return flows with supplier escalation. Full visibility, protected margins.</p></div>
+<div class="zaf-prod reveal"><div class="icon-box">QA</div><h4>AI QA Dashboard</h4><p>Every conversation scored. Sentiment, compliance, coaching — all automated.</p></div>
+<div class="zaf-prod reveal"><div class="icon-box">PR</div><h4>Performance Reporter</h4><p>AI-generated weekly reports delivered automatically. Zero manual work.</p></div>
+<div class="zaf-prod reveal"><div class="icon-box">EE</div><h4>Escalation Engine</h4><p>Smart routing with context. Right person, right info, no delays.</p></div>
+</div>
+</section>
+
+<section class="results" id="results">
+<div class="results-header reveal"><h2>Proven at scale.</h2></div>
+<div class="results-grid">
+<div class="result-card reveal"><h3>Visme</h3><div class="r-meta">25M+ USERS · SAAS</div><p>Built CX org from zero. 24/5 global operations, AI knowledge base, feedback loops into product.</p><div class="r-stats"><div class="r-stat"><div class="r-stat-val">37.9%</div><div class="r-stat-lbl">Faster</div></div><div class="r-stat"><div class="r-stat-val">24.8%</div><div class="r-stat-lbl">Better FCR</div></div></div></div>
+<div class="result-card reveal"><h3>Remote.com</h3><div class="r-meta">$3B VALUATION · HR TECH</div><p>Global CS team. AI chatbots, productivity tools, retention dashboards. Enterprise-grade operations.</p><div class="r-stats"><div class="r-stat"><div class="r-stat-val">98.5%</div><div class="r-stat-lbl">CSAT</div></div><div class="r-stat"><div class="r-stat-val">AI</div><div class="r-stat-lbl">Tools shipped</div></div></div></div>
+<div class="result-card reveal"><h3>ButcherCrowd</h3><div class="r-meta">DTC DELIVERY</div><p>Full Zendesk implementation. Custom AI QA platform. 15-agent team transformed.</p><div class="r-stats"><div class="r-stat"><div class="r-stat-val">~90%</div><div class="r-stat-lbl">QA time cut</div></div><div class="r-stat"><div class="r-stat-val">Custom</div><div class="r-stat-lbl">AI QA built</div></div></div></div>
+</div>
+</section>
+
+<div class="stats-row reveal">
+<div class="stat-cell"><div class="stat-v">25M+</div><div class="stat-l">Users</div></div>
+<div class="stat-cell"><div class="stat-v">98.5%</div><div class="stat-l">CSAT</div></div>
+<div class="stat-cell"><div class="stat-v">37.9%</div><div class="stat-l">Faster</div></div>
+<div class="stat-cell"><div class="stat-v">~90%</div><div class="stat-l">QA Reduced</div></div>
+</div>
+
+<section class="for-section">
+<div class="for-header reveal"><h2>Built for teams at every stage.</h2><p>From first support hire to 500-person CX org.</p></div>
+<div class="for-grid">
+<div class="for-card reveal"><div class="fc-icon">🚀</div><h4>Startups</h4><p>Build your CX foundation right. Zendesk, automation, QA — infrastructure that scales from day one.</p></div>
+<div class="for-card reveal"><div class="fc-icon">📈</div><h4>Growth-Stage</h4><p>Optimize and automate. Turn a working team into a high-performance, data-driven operation.</p></div>
+<div class="for-card reveal"><div class="fc-icon">🏢</div><h4>Enterprise</h4><p>Custom apps, AI at scale, advanced analytics. Proven at $3B+ valuations with global teams.</p></div>
+</div>
+</section>
+
+<div class="tech-bar reveal">
+<span class="t-chip">Zendesk Expert</span><span class="t-chip">Salesforce</span><span class="t-chip">n8n</span><span class="t-chip">Intercom</span><span class="t-chip">Gorgias</span><span class="t-chip">OpenAI</span><span class="t-chip">Anthropic</span><span class="t-chip">Gainsight</span><span class="t-chip">ZAF</span><span class="t-chip">Jira</span><span class="t-chip">Slack</span>
+</div>
+
+<section class="cta-section" id="contact">
+<h2 class="reveal">Ready to build?</h2>
+<p class="reveal">Tell us what's broken. We'll build the fix.</p>
+<div class="cta-row reveal"><a href="mailto:ard@cxlead.co">ard@cxlead.co</a><a href="https://linkedin.com/in/ardin" target="_blank">LinkedIn</a></div>
+</section>
+<footer><span>© 2026 CXLead</span><span>AI-Native CX Engineering</span></footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+document.querySelectorAll('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.6,ease:"power2.out",scrollTrigger:{trigger:el,start:"top 85%",once:true}})});
+</script>
+</body>
+</html>
